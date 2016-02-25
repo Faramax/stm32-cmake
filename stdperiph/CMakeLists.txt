@@ -225,6 +225,79 @@ ELSEIF(${STM32_FAMILY} STREQUAL "F4")
         
     LIST(REMOVE_ITEM STDPERIPH_HEADERS ${STDPERIPH_HEADER_DIR}/stm32f4xx_misc.h)
     INSTALL(FILES ${STDPERIPH_HEADER_DIR}/misc.h RENAME stm32f4xx_misc.h DESTINATION include/stm32f4)
+
+ELSEIF(${STM32_FAMILY} STREQUAL "F7")
+
+    IF(EXISTS "${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal.c")
+        MESSAGE(STATUS "Detected STM32F7 HAL library")
+        SET(STDPERIPH_SOURCES
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_adc.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_adc_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_can.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_cec.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_cortex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_crc.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_crc_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_cryp.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_cryp_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_dac.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_dac_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_dcmi.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_dcmi_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_dma.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_dma_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_dma2d.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_eth.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_flash.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_flash_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_gpio.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_hash.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_hash_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_hcd.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_i2c.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_i2c_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_i2s.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_irda.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_iwdg.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_lptim.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_ltdc.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_msp_template.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_nand.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_nor.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_pcd.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_pcd_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_pwr.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_pwr_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_qspi.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_rcc.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_rcc_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_rng.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_rtc.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_rtc_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_sai.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_sai_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_sd.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_sdram.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_smartcard.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_smartcard_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_spdifrx.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_spi.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_sram.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_tim.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_tim_ex.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_uart.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_usart.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_hal_wwdg.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_ll_fmc.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_ll_sdmmc.c
+            ${STDPERIPH_SOURCE_DIR}/stm32f7xx_ll_usb.c
+        )
+        STM32_PREPEND_FILE_NAMES(STDPERIPH_HEADERS ${STDPERIPH_HEADER_DIR}/ ${STM32_STDPERIPH_REL_HEADERS_HAL_F7})
+        STM32_PREPEND_FILE_NAMES(STDPERIPH_HEADER_DIRECTORIES ${STDPERIPH_HEADER_DIR}/ ${STM32_STDPERIPH_HEADER_DIRECTORIES_HAL_F7})
+   ELSE()
+      MESSAGE(ERROR "STM32F7 HAL library haven't beed detected")
+   ENDIF()
 ENDIF()
 
 INCLUDE_DIRECTORIES(
@@ -254,3 +327,4 @@ ENDFOREACH()
 
 INSTALL(TARGETS ${STDPERIPH_LIBRARIES} RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 INSTALL(FILES ${STDPERIPH_HEADERS} DESTINATION include/stm32${STM32_FAMILY_LOWER})
+INSTALL(DIRECTORY ${STDPERIPH_HEADER_DIRECTORIES} DESTINATION include/stm32${STM32_FAMILY_LOWER})

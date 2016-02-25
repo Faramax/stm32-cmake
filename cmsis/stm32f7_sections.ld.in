@@ -1,0 +1,5 @@
+    /* MEMORY_ARRAY */
+    .ROarraySection :
+    {
+            *(.ROarraySection)                          
+    } >MEMORY_ARRAY

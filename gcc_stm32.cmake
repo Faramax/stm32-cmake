@@ -2,7 +2,7 @@ INCLUDE(CMakeForceCompiler)
 INCLUDE(${CMAKE_CURRENT_LIST_DIR}/gcc_stm32_sizeutil.cmake)
 INCLUDE(${CMAKE_CURRENT_LIST_DIR}/gcc_stm32_common.cmake)
 
-SET(STM32_SUPPORTED_FAMILIES F0 F1 F2 F4 CACHE INTERNAL "stm32 supported families")
+SET(STM32_SUPPORTED_FAMILIES F0 F1 F2 F4 F7 CACHE INTERNAL "stm32 supported families")
 
 IF(NOT TOOLCHAIN_PREFIX)
      SET(TOOLCHAIN_PREFIX "/usr")
@@ -20,7 +20,7 @@ IF(NOT STM32_FAMILY)
         SET(STM32_FAMILY "F1" CACHE INTERNAL "stm32 family")
         MESSAGE(STATUS "Neither STM32_FAMILY nor STM32_CHIP specified, using default STM32_FAMILY: ${STM32_FAMILY}")
     ELSE()
-        STRING(REGEX REPLACE "^[sS][tT][mM]32(([fF][0-4])|([lL][0-1])|([tT])|([wW])).+$" "\\1" STM32_FAMILY ${STM32_CHIP})
+        STRING(REGEX REPLACE "^[sS][tT][mM]32(([fF][0-47])|([lL][0-1])|([tT])|([wW])).+$" "\\1" STM32_FAMILY ${STM32_CHIP})
         STRING(TOUPPER ${STM32_FAMILY} STM32_FAMILY)
         MESSAGE(STATUS "Selected STM32 family: ${STM32_FAMILY}")
     ENDIF()
@@ -70,12 +70,12 @@ INCLUDE(${CMAKE_CURRENT_LIST_DIR}/gcc_stm32${STM32_FAMILY_LOWER}.cmake)
 # --------------------------
 
 SET(STM32_CMAKE_XXX_COMPILER_FLAGS "${STM32_CMAKE_XXX_COMPILER_FLAGS} -g") # always include debug information
-SET(STM32_CMAKE_CXX_COMPILER_FLAGS "${STM32_CMAKE_CXX_COMPILER_FLAGS} -fvisibility=hidden -fno-builtin -Wall -ffunction-sections -fdata-sections -fomit-frame-pointer -mabi=aapcs -fno-unroll-loops -ffast-math -ftree-vectorize")
+SET(STM32_CMAKE_CXX_COMPILER_FLAGS "${STM32_CMAKE_CXX_COMPILER_FLAGS} -fvisibility=hidden -Wall -ffunction-sections -fdata-sections -fomit-frame-pointer -mabi=aapcs -ffast-math -ftree-vectorize")
 SET(STM32_CMAKE_CXX_COMPILER_FLAGS "${STM32_CMAKE_XXX_COMPILER_FLAGS} ${STM32_CMAKE_CXX_COMPILER_FLAGS} ${STM32_BOARD_DEFINITIONS}")
 SET(STM32_CMAKE_ASM_COMPILER_FLAGS "${STM32_CMAKE_XXX_COMPILER_FLAGS} ${STM32_CMAKE_ASM_COMPILER_FLAGS}")
 SET(STM32_CMAKE_XXX_LINKER_FLAGS   "${STM32_CMAKE_XXX_LINKER_FLAGS} -mabi=aapcs")
 
-SET(STM32_CMAKE_C_COMPILER_FLAGS_RELEASE "-DNDEBUG -Os -flto -fuse-linker-plugin -ffat-lto-objects")
+SET(STM32_CMAKE_C_COMPILER_FLAGS_RELEASE "-DNDEBUG -Ofast -flto -fuse-linker-plugin -ffat-lto-objects")
 SET(STM32_CMAKE_CXX_COMPILER_FLAGS_RELEASE "${STM32_CMAKE_C_COMPILER_FLAGS_RELEASE} -finline-functions -frename-registers")
 SET(STM32_CMAKE_LINKER_FLAGS_RELEASE "-flto")
 

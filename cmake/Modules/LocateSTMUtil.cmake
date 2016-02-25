@@ -45,6 +45,19 @@ MACRO(STM32_LOCATE_CMSIS_REL_HEADERS)
         Include/core_cmFunc.h
         Include/core_cmInstr.h
     )
+
+    SET(STM32_CMSIS_REL_HEADERS_F7
+        Device/ST/STM32F7xx/Include/system_stm32f7xx.h
+        Device/ST/STM32F7xx/Include/stm32f7xx.h
+        Include/arm_math.h
+        Include/cmsis_armcc.h
+        Include/cmsis_armcc_V6.h
+        Include/cmsis_gcc.h
+        Include/core_cm7.h
+        Include/core_cmSimd.h
+        Include/core_cmFunc.h
+        Include/core_cmInstr.h
+    )
 ENDMACRO()
 
 MACRO(STM32_LOCATE_STDPERIPH_REL_HEADERS)
@@ -210,4 +223,77 @@ MACRO(STM32_LOCATE_STDPERIPH_REL_HEADERS)
         stm32f4xx_wwdg.h
         stm32f4xx_misc.h
     )
+    SET(STM32_STDPERIPH_REL_HEADERS_HAL_F7
+        stm32f7xx_hal.h
+        stm32f7xx_hal_adc.h
+        stm32f7xx_hal_adc_ex.h
+        stm32f7xx_hal_can.h
+        stm32f7xx_hal_cec.h
+        stm32f7xx_hal_conf.h
+        stm32f7xx_hal_conf_template.h
+        stm32f7xx_hal_cortex.h
+        stm32f7xx_hal_crc.h
+        stm32f7xx_hal_crc_ex.h
+        stm32f7xx_hal_cryp.h
+        stm32f7xx_hal_cryp_ex.h
+        stm32f7xx_hal_dac.h
+        stm32f7xx_hal_dac_ex.h
+        stm32f7xx_hal_dcmi.h
+        stm32f7xx_hal_dcmi_ex.h
+        stm32f7xx_hal_def.h
+        stm32f7xx_hal_dma.h
+        stm32f7xx_hal_dma_ex.h
+        stm32f7xx_hal_dma2d.h
+        stm32f7xx_hal_eth.h
+        stm32f7xx_hal_flash.h
+        stm32f7xx_hal_flash_ex.h
+        stm32f7xx_hal_gpio.h
+        stm32f7xx_hal_gpio_ex.h
+        stm32f7xx_hal_hash.h
+        stm32f7xx_hal_hash_ex.h
+        stm32f7xx_hal_hcd.h
+        stm32f7xx_hal_i2c.h
+        stm32f7xx_hal_i2c_ex.h
+        stm32f7xx_hal_i2s.h
+        stm32f7xx_hal_irda.h
+        stm32f7xx_hal_irda_ex.h
+        stm32f7xx_hal_iwdg.h
+        stm32f7xx_hal_lptim.h
+        stm32f7xx_hal_ltdc.h
+        stm32f7xx_hal_nand.h
+        stm32f7xx_hal_nor.h
+        stm32f7xx_hal_pcd.h
+        stm32f7xx_hal_pcd_ex.h
+        stm32f7xx_hal_pwr.h
+        stm32f7xx_hal_pwr_ex.h
+        stm32f7xx_hal_qspi.h
+        stm32f7xx_hal_rcc.h
+        stm32f7xx_hal_rcc_ex.h
+        stm32f7xx_hal_rng.h
+        stm32f7xx_hal_rtc.h
+        stm32f7xx_hal_rtc_ex.h
+        stm32f7xx_hal_sai.h
+        stm32f7xx_hal_sai_ex.h
+        stm32f7xx_hal_sd.h
+        stm32f7xx_hal_sdram.h
+        stm32f7xx_hal_smartcard.h
+        stm32f7xx_hal_smartcard_ex.h
+        stm32f7xx_hal_spdifrx.h
+        stm32f7xx_hal_spi.h
+        stm32f7xx_hal_sram.h
+        stm32f7xx_hal_tim.h
+        stm32f7xx_hal_tim_ex.h
+        stm32f7xx_hal_uart.h
+        stm32f7xx_hal_uart_ex.h
+        stm32f7xx_hal_usart.h
+        stm32f7xx_hal_usart_ex.h
+        stm32f7xx_hal_wwdg.h
+        stm32f7xx_ll_fmc.h
+        stm32f7xx_ll_sdmmc.h
+        stm32f7xx_ll_usb.h
+    )
+
+   SET(STM32_STDPERIPH_HEADER_DIRECTORIES_HAL_F7
+      Legacy
+   )
 ENDMACRO()
